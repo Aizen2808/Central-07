@@ -156,7 +156,7 @@ async function createRoom(){
   gateStatus('Creating room...');
   const {data,error}=await supabase.rpc('create_room',{p_name:'Central 26',p_display_name:name});
   if(error){gateStatus(error.message,true);return;}
-  roomId=data?.[0]?.room_id; const code=data?.[0]?.room_code;
+  const roomId=data?.[0]?.room_id; const code=data?.[0]?.room_code;
   if(!roomId){gateStatus('Room creation failed.',true);return;}
   const {data:r,error:re}=await supabase.from('rooms').select('*').eq('id',roomId).single();
   if(re){gateStatus(re.message,true);return;}
